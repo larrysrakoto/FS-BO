@@ -1,0 +1,27 @@
+.action{
+  width: 10vw;
+  height: 7vh;
+  display: flex;
+  justify-content: space-between;
+
+  .icon{
+    width: 40%;
+    height: 60%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; 
+    transition: 0.5s ease;
+    &:hover{
+      transform: scale(.90);
+    }
+
+    &.edit{
+      background-image: url('../../assets/edit.svg');
+    }
+    &.delete{
+      background-image: url('../../assets/delete.svg');
+    }
+    
+  }
+  
+}

@@ -1,0 +1,11 @@
+.mantine-Header-root{
+  margin: 0px;
+
+  .logo{
+    width: 5vw;
+    height: 4vw;
+    background-image: url('../../assets/logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}

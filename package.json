@@ -2,12 +2,36 @@
   "name": "@fs-tuto/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start:bo": "nx serve fs-tuto-bo"
+  },
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mantine/carousel": "^6.0.20",
+    "@mantine/core": "^6.0.20",
+    "@mantine/dates": "^6.0.20",
+    "@mantine/dropzone": "^6.0.20",
+    "@mantine/form": "^6.0.20",
+    "@mantine/hooks": "^6.0.20",
+    "@mantine/modals": "^6.0.20",
+    "@mantine/notifications": "^6.0.20",
+    "@mantine/nprogress": "^6.0.20",
+    "@mantine/prism": "^6.0.20",
+    "@mantine/spotlight": "^6.0.20",
+    "@mantine/tiptap": "^6.0.20",
+    "@mui/material": "^5.14.8",
     "@swc/helpers": "~0.5.0",
+    "@tabler/icons-react": "^2.34.0",
+    "@tiptap/extension-link": "^2.1.8",
+    "@tiptap/react": "^2.1.8",
+    "@tiptap/starter-kit": "^2.1.8",
+    "dayjs": "^1.11.9",
+    "embla-carousel-react": "^7.1.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
     "@nx/eslint-plugin": "16.8.1",

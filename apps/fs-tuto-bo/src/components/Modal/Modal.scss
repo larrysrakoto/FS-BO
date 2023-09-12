@@ -1,0 +1,24 @@
+.css-jge2lb{
+  border-radius: .5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+
+  .formulaire{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .form{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .validate{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
