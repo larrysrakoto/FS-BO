@@ -1,13 +1,19 @@
 import { useState } from 'react';
 import { createStyles, Table, ScrollArea, rem } from '@mantine/core';
-import Modal from '../../components/Modal'
-import './Abonnement.scss'
+import Modal from '../../components/Modal';
+import './Abonnement.scss';
+import { dataType } from '../../Utils/Types';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {Fichier} from '../../Utils/Atoms/Fichier'
+import { SubsState } from '../../Utils/Atoms/Abonnement';
+
 
 const useStyles = createStyles((theme) => ({
   header: {
     position: 'sticky',
     top: 0,
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    backgroundColor:
+      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
     transition: 'box-shadow 150ms ease',
 
     '&::after': {
@@ -16,8 +22,11 @@ const useStyles = createStyles((theme) => ({
       left: 0,
       right: 0,
       bottom: 0,
-      borderBottom: `${rem(1)} solid ${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[2]
-        }`,
+      borderBottom: `${rem(1)} solid ${
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[3]
+          : theme.colors.gray[2]
+      }`,
     },
   },
 
@@ -27,32 +36,51 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface TableScrollAreaProps {
-  data: { label: string; prix: number; Nbvalide: number; Nbminimal: number; Nbcours: number }[];
+  data?: dataType[];
 }
 
 export function Abonnement({ data }: TableScrollAreaProps) {
+  const [subs, setSubs] = useRecoilState(SubsState)
   const { classes, cx } = useStyles();
   const [scrolled, setScrolled] = useState(false);
+  const [Fichiers, setFichiers] = useRecoilState(Fichier)
+ 
+  const handledelete = (i: number) => {
+    const allData = [...subs]
+    allData.splice(i, 1)
+    setSubs(allData)
+  }
 
-  const rows = data.map((row) => (
-    <tr key={row.label}>
+  const rows = subs.map((row, i) => (
+    <tr key={row.id}>
       <td>{row.label}</td>
-      <td>{row.prix}</td>
-      <td>{row.Nbvalide}</td>
-      <td>{row.Nbminimal}</td>
+      <td>{row.prix} Ar</td>
+      <td>{row.Jvalide} jours</td>
+      <td>{row.Jmin}</td>
       <td>{row.Nbcours}</td>
+      <td>
+        <div className="action">
+          <div className="icon edit"></div>
+          <div className="icon delete" 
+          onClick={() => handledelete(i)}></div>
+        </div>
+      </td>
     </tr>
   ));
 
   return (
     <div>
-      <div className='modal'>
-      <Modal/>  
-
+      <div className="modal">
+        <Modal />
       </div>
-      <ScrollArea h={300} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
+      <ScrollArea
+        h={300}
+        onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
+      >
         <Table miw={700}>
-          <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
+          <thead
+            className={cx(classes.header, { [classes.scrolled]: scrolled })}
+          >
             <tr>
               <th>label</th>
               <th>prix</th>

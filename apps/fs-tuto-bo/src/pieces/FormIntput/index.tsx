@@ -38,25 +38,27 @@ const useStyles = createStyles((theme, { floating }: { floating: boolean }) => (
   },
 }));
 
-type FItype = {
-  label: string;
-  type: string
-
+type FItype = Omit<JSX.IntrinsicElements['input'], 'onChange'> & {
+  label: string,
+  type: string,
+  onChange?: (val: string ) => void,
+  value?: string,
+  accept?: string
 }
 
-const FormInput: React.FC<FItype> = ({ label, type }) => {
+const FormInput: React.FC<FItype> = ({ label, type, onChange, value='', accept }) => {
   const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState('');
   const { classes } = useStyles({ floating: value.trim().length !== 0 || focused });
 
   return (
     <TextInput
       label={label}
       placeholder={label}
+      accept={accept}
       required
       classNames={classes}
       value={value}
-      onChange={(event) => setValue(event.currentTarget.value)}
+      onChange={(event) => onChange && onChange(event.currentTarget.value)}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
       mt="md"

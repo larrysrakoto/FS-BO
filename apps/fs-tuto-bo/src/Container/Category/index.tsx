@@ -2,6 +2,8 @@ import { CSSProperties, useState } from 'react';
 import { createStyles, Table, Checkbox, ScrollArea, rem } from '@mantine/core';
 import './Category.scss'
 import ModalCategories from '../../components/ModalCategories'
+import { CoursType } from '../../Utils/Types';
+
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -13,7 +15,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface TableSelectionProps {
-  donnees: { label: string; icon: string; id: string }[];
+  donnees: CoursType[];
 }
 
 export function TableSelection({ donnees }: TableSelectionProps) {
@@ -46,12 +48,21 @@ export function TableSelection({ donnees }: TableSelectionProps) {
                 '--bg': `url(${item.icon})`
               } as CSSProperties}
               />
+              <td>
+          <div className="action">
+            <div className='icon edit'></div>
+            <div className='icon delete'></div>
+          </div>
+        
+        </td>
       </tr>
+      
     );
   });
 
   return (
     <ScrollArea>
+
               <ModalCategories/>
 
       <Table miw={800} verticalSpacing="sm">
@@ -67,6 +78,7 @@ export function TableSelection({ donnees }: TableSelectionProps) {
             </th>
             <th>Label</th>
             <th>Icon</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>

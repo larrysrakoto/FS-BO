@@ -5,9 +5,11 @@ import Category from '../Container/Category'
 import Home from '../Container/Home/Home';
 import { Routes, Route } from 'react-router-dom';
 import './app.scss'
-import logo from '../assets/logo.svg'
 import Cours from '../Container/Cours'
 import FichierCours from '../Container/FichierCours'
+import { useRecoilValue } from 'recoil';
+import { Fichier } from '../Utils/Atoms/Fichier';
+import { Course } from '../Utils/Atoms/course';
 
 const nav = [{
   link: '/',
@@ -31,28 +33,8 @@ const nav = [{
 },
 ]
 
-const data = [{
-  label: 'dev',
-  prix: 12000,
-  Nbvalide: 12,
-  Nbminimal: 2,
-  Nbcours: 4
-},
 
-]
 
-const donnees = [{
-  id: '12',
-  label: 'dev',
-  icon: logo,
-},
-{
-  id: '1',
-  label: 'dev',
-  icon: logo,
-}
-
-]
 
 const datum = [{
   cours: 'js',
@@ -61,6 +43,10 @@ const datum = [{
 }]
 
 export function App() {
+  
+  const cours = useRecoilValue(Fichier)
+  const donnees = useRecoilValue(Course)
+
   return (
     <div className='main'>
       <div className='bar-nav'>
@@ -69,11 +55,10 @@ export function App() {
       <div className='content'>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Abonnement" element={<Abonnement data={data} />} />
+          <Route path="/Abonnement" element={<Abonnement />} />
           <Route path="/Categories" element={<Category donnees={donnees} />} />
           <Route path="/Cours" element={<Cours datum={datum} />} />
-          <Route path="/FichierCours" element={<FichierCours datum={datum} />} />
-
+          <Route path="/FichierCours" element={<FichierCours datum={cours} />} />
         </Routes>
       </div>
     </div>
